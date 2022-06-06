@@ -20,7 +20,8 @@ The end goal is to add the collection to [@meodai's Color Names](https://github.
 
 ### Parsed Data (in progress)
 
-- [Color Names with Links](https://airtable.com/shrabAncr9wXCgE3T)
+- [Color Names with Links (Table)](https://airtable.com/shrabAncr9wXCgE3T)
+- [Color Names (Grid View)](https://airtable.com/shrgNqiOZmtuqdD7W/tblC7IMejtiLBmUm6)
 
 ### Collaborators
 
