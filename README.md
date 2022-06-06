@@ -16,6 +16,7 @@ The end goal is to add the collection to [@meodai's Color Names](https://github.
 - https://www.gutenberg.org/files/63087/63087-h/63087-h.htm
 - https://archive.org/details/colorstandardsc00ridg/mode/2up
 - https://archive.org/details/mobot31753002026018/mode/2up
+- https://archive.org/details/gri_c00033125001039383/mode/2up
 
 
 ### Parsed Data (in progress)
