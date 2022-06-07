@@ -1,4 +1,15 @@
 const fs = require('fs');
+const PaletteExtractor = require("./palette-extractor.js");
+const {
+  getSync
+} = require("@andreekeberg/imagedata");
+
+const download = function (uri, filename, callback) {
+  request.head(uri, function (err, res, body) {
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
+
 
 const {
   parseCSVString,
@@ -39,12 +50,19 @@ function wbModStringtoWB(str){
   }
 }
 
-const exportList = list.entries.map(entry => {
+
+const exportList = list.entries.map((entry) => {
   // https://www.gutenberg.org/files/63087/63087-h/63087-h.htm#tones
   const neutralGrey = neutralGreyPercents[entry["Color or Hue Number"].split(/\d+/g)[1].length];
   const hueBase100 = parseInt(/\d+/g.exec(entry["Color or Hue Number"])[0]);
   const hueBase360 = hueBase100 * 3.6;
 
+  const filename = entry['Static Image Link'].split('/').pop();
+
+  const imgData = getSync(`./src/plate_swatches/${filename}`);
+  console.log(`extracting colors from ${filename}`);
+  const paletteExtractor = new PaletteExtractor();
+  const extractedColors = paletteExtractor.processImageData(imgData.data, 1);
   const tone = wbModStringtoWB(entry['Tone']);
 
   entry.parsed = {
@@ -52,7 +70,9 @@ const exportList = list.entries.map(entry => {
     hueBase360,
     toneWhite: tone[0],
     toneBlack: tone[1],
-  }
+    dominantColor: extractedColors[0],
+  };
+
   return entry
 });
 

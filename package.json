@@ -27,5 +27,7 @@
     "url": "https://github.com/davo/Color-Standards-and-Color-Nomenclature/issues"
   },
   "homepage": "https://github.com/davo/Color-Standards-and-Color-Nomenclature#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "@andreekeberg/imagedata": "^1.0.2"
+  }
 }
