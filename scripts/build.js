@@ -27,28 +27,34 @@ const wbMods = {
   'n': [0, 94],
 };
 
+const neutralGreyPercents = [
+  0, 32, 58, 77, 90, 95.5, 100
+]
+
 function wbModStringtoWB(str){
   if (wbMods.hasOwnProperty(str)){
     return wbMods[str];
   } else {
-    return [0,0];
+    return [0, 0];
   }
 }
 
-const hexes = [];
-list.entries.forEach(entry => {
+const exportList = list.entries.map(entry => {
   // https://www.gutenberg.org/files/63087/63087-h/63087-h.htm#tones
+  const neutralGrey = neutralGreyPercents[entry["Color or Hue Number"].split(/\d+/g)[1].length];
   const hueBase100 = parseInt(/\d+/g.exec(entry["Color or Hue Number"])[0]);
   const hueBase360 = hueBase100 * 3.6;
 
-  const hwb = [hueBase360, ...wbModStringtoWB(entry.Tone)];
-  const calculatedRGB = convertHwbToRgb(hwb);
-  const calculatedHEX = rgbToHex(calculatedRGB);
+  const tone = wbModStringtoWB(entry['Tone']);
 
-  hexes.push(calculatedHEX);
+  entry.parsed = {
+    hueBase100,
+    hueBase360,
+    toneWhite: tone[0],
+    toneBlack: tone[1],
+  }
+  return entry
 });
 
-//fs.writeFileSync('./dist/HWBhexes.json', JSON.stringify(hexes, null, 2));
-
 // export the list as a JSON file
-fs.writeFileSync('./dist/colornames.json', JSON.stringify(list.entries, null, 2));
+fs.writeFileSync('./dist/colornames.json', JSON.stringify(exportList, null, 2));
