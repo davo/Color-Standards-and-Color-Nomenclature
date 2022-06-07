@@ -64,17 +64,30 @@ const exportList = list.entries.map((entry) => {
   const paletteExtractor = new PaletteExtractor();
   const extractedColors = paletteExtractor.processImageData(imgData.data, 1);
   const tone = wbModStringtoWB(entry['Tone']);
-
-  entry.parsed = {
+  
+  const parsed = {
     hueBase100,
     hueBase360,
-    toneWhite: tone[0],
-    toneBlack: tone[1],
+    toneWhitePercent: tone[0],
+    toneBlackPercent: tone[1],
+    neutralGreyPercent: neutralGrey,
     dominantColor: extractedColors[0],
   };
 
-  return entry
+  const sanitizedEntry = {
+    name: entry["Processed Color Name"],
+    hex: extractedColors[0],
+    plate: entry["Plate"],
+    hue: entry["Color or Hue Number"],
+    tone: entry["Tone"],
+    image: filename,
+    parsed
+  };
+
+  return sanitizedEntry;
 });
 
 // export the list as a JSON file
 fs.writeFileSync('./dist/colornames.json', JSON.stringify(exportList, null, 2));
+
+console.log(`Successfully exported ${exportList.length} colors to ./dist/colors.json`);
