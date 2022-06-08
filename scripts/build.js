@@ -13,8 +13,7 @@ const download = function (uri, filename, callback) {
 
 const {
   parseCSVString,
-  convertHwbToRgb,
-  rgbToHex
+  romanToInt,
 } = require ('./lib.js');
 
 const RAWcsv = fs.readFileSync('./src/colornames.csv', 'utf8');
@@ -77,7 +76,8 @@ const exportList = list.entries.map((entry) => {
   const sanitizedEntry = {
     name: entry["Processed Color Name"],
     hex: extractedColors[0],
-    plate: entry["Plate"],
+    plateNumberRoman: entry["Plate"],
+    plateNumber: romanToInt(entry["Plate"]),
     hue: entry["Color or Hue Number"],
     tone: entry["Tone"],
     image: filename,
