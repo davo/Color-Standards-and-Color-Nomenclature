@@ -71,13 +71,13 @@ const exportList = list.entries.map((entry) => {
     toneBlackPercent: tone[1],
     neutralGreyPercent: neutralGrey,
     dominantColor: extractedColors[0],
+    plateInt: romanToInt(entry["Plate"]),
   };
 
   const sanitizedEntry = {
     name: entry["Processed Color Name"],
     hex: extractedColors[0],
-    plateNumberRoman: entry["Plate"],
-    plateNumber: romanToInt(entry["Plate"]),
+    plate: entry["Plate"],
     hue: entry["Color or Hue Number"],
     tone: entry["Tone"],
     image: filename,
