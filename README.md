@@ -9,6 +9,57 @@ The book full title "Color Standards and Color Nomenclature: With fifty-three co
 
 The end goal is to add the collection to [@meodai's Color Names](https://github.com/meodai/color-names).
 
+## Data
+
+The parsed colors are exported into [colornames.json](./dist/colornames.json). 
+It is an array of objects sorted by the color names.
+
+```js
+[
+  {
+    // Normalized Color-Name
+    "name": "Absinthe Green",
+    
+    // Dominant color extracted from the original color-swatch
+    "hex": "#a6b46c",
+    
+    // The color-swatches are grouped by hue on organized on plates
+    // labeled using roman numbers (the parsed int is contained in parsed.plateInt)
+    "plate": "XXXI",
+    
+    // The hue as in the "maxwell tops" unlike more modern color-model
+    // the colors range from 0-100. It used different primary colors than the color-wheels we know today
+    // even though this information is parsed into parsed: parsed.hueBase100 I am not sure what to make 
+    // out of it yet. The "`" indicates the amount of "grey" mixed into the hue parsed as "neutralGreyPercent" 
+    "hue": "29′′",
+    
+    // the tone describes the amount of black and white mixed into the colors
+    // this information is parsed in parsed.toneWhitePercent and parsed.toneBlackPercent
+    "tone": "—",
+    
+    // the reference to the orignal image, contained in the SRC folder
+    "image": "xxxi_29pp___absinthe_green.jpg",
+    
+    // object containing all the parsed information
+    "parsed": {
+      "hueBase100": 29,
+      "hueBase360": 104.4,
+      "toneWhitePercent": 0,
+      "toneBlackPercent": 0,
+      "neutralGreyPercent": 58,
+      
+      // domainant color
+      "dominantColor": "#a6b46c",
+      
+      // parsed plate number
+      "plateInt": 31,
+      
+      // original color-swatch position in the book
+      "originalPosition": 641
+    }
+  },//...
+]
+```
 
 ### Data Sources
 
