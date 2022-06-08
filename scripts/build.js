@@ -10,6 +10,7 @@ const download = function (uri, filename, callback) {
   });
 };
 
+const originalImagesOrder = require("./originalImagesOrder.js");
 
 const {
   parseCSVString,
@@ -72,6 +73,7 @@ const exportList = list.entries.map((entry) => {
     neutralGreyPercent: neutralGrey,
     dominantColor: extractedColors[0],
     plateInt: romanToInt(entry["Plate"]),
+    originalPosition: originalImagesOrder.indexOf(filename),
   };
 
   const sanitizedEntry = {
